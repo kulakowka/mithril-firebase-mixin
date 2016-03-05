@@ -46,7 +46,7 @@ module.exports = function firebaseMixin (m, target) {
    */
   target.getData = function (reference, oncomplete) {
     reference.once('value', function (snap) {
-      oncomplete.call(target, snap.val())
+      oncomplete.call(target, unify(snap.key(), snap.val()))
       m.redraw()
     })
   }
