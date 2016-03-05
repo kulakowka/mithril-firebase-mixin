@@ -39,13 +39,13 @@ module.exports = function firebaseMixin (m, target) {
   }
 
   /**
-   * getData - retrieve the data at the specified firebase location once
+   * onData - retrieve the data at the specified firebase location once
    * param @reference firebaseReference - firebase reference to write to
    * param @oncomplete function - callback function with fetched data
    *
    */
-  target.getData = function (reference, oncomplete) {
-    reference.once('value', function (snap) {
+  target.onData = function (reference, oncomplete) {
+    reference.on('value', function (snap) {
       oncomplete.call(target, unify(snap.key(), snap.val()))
       m.redraw()
     })
