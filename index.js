@@ -59,7 +59,7 @@ module.exports = function firebaseMixin (m, target) {
    *              complete snapshot.val() rather than an array
    *
    */
-  target.onlivedata = function (reference, ondata, asObject) {
+  target.onLiveData = function (reference, ondata, asObject) {
     // save the reference for later removal of eventlisteners
     _references.push(reference)
 
