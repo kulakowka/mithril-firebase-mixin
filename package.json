@@ -1,0 +1,24 @@
+{
+  "name": "mithril-firebase-mixin",
+  "version": "0.0.1",
+  "description": "Mixin for mithril controllers to enable firebase livedata",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kulakowka/mithril-firebase-mixin.git"
+  },
+  "keywords": [
+    "mithril",
+    "firebase",
+    "livedata"
+  ],
+  "author": "Anton Kulakov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kulakowka/mithril-firebase-mixin/issues"
+  },
+  "homepage": "https://github.com/kulakowka/mithril-firebase-mixin#readme"
+}
