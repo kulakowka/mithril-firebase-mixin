@@ -6,25 +6,28 @@ Mixin for mithril controllers to enable firebase livedata
 import m from 'mithril'
 import firebaseMixin from 'mithril-firebase-mixin'
 
-const ref = new Firebase('https://<myfirebase>.firebaseio.com/posts')
+const ref = new Firebase('https://<myfirebase>.firebaseio.com')
 
-const Posts = {
+const Example = {
   controller (args) {
-    var scope = firebaseMixin(m, this)
+    firebaseMixin(m, this)
 
-    scope.onlivedata(ref, (data) => (scope.list = data))
+    this.onData(ref.child('users/kulakowka'), (data) => (this.user = data))
+    this.onLiveData(ref.child('users'), (data) => (this.users = data))
   },
 
   view (ctrl) {
     return (
+      {ctrl.user && ctrl.user.username}
+
       <ul>
-        {ctrl.list && ctrl.list.map(post => {
-          <li>{post.title}</li>
+        {ctrl.users && ctrl.users.map(user => {
+          <li>{user.username}</li>
         })}
       </ul>
     )
   }
 }
 
-export default Posts
+export default Example
 ```
