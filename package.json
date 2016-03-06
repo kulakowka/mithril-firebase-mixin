@@ -1,6 +1,6 @@
 {
   "name": "mithril-firebase-mixin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Mixin for mithril controllers to enable firebase livedata",
   "main": "index.js",
   "scripts": {

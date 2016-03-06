@@ -45,6 +45,9 @@ module.exports = function firebaseMixin (m, target) {
    *
    */
   target.onData = function (reference, oncomplete) {
+    // save the reference for later removal of eventlisteners
+    _references.push(reference)
+
     reference.on('value', function (snap) {
       oncomplete.call(target, unify(snap.key(), snap.val()))
       m.redraw()
