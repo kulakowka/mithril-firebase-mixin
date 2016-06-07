@@ -24,9 +24,8 @@ var SampleMithrilApp = {};
 
 SampleMithrilApp.controller = function(args) {
   var scope = mixinFirebase(this);
-  console.log('scope=', scope, this);
-  scope.onlivedata(args.firebase, function(data) {
-    console.log('scope.onLivedata:', data);
+  
+  scope.onlivedata(args.firebase, function(data) {    
     scope.customers = data;
   });
 };
