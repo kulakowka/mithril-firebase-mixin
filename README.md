@@ -6,28 +6,45 @@ Mixin for mithril controllers to enable firebase livedata
 import m from 'mithril'
 import firebaseMixin from 'mithril-firebase-mixin'
 
-const ref = new Firebase('https://<myfirebase>.firebaseio.com')
 
-const Example = {
-  controller (args) {
-    firebaseMixin(m, this)
+// Acquiring a Firebase DB Ref.
+var config = {
+  apiKey: "Your APP's API KEY",
+  authDomain: "<Your App>.firebaseapp.com",
+  databaseURL: "https://<Your App>.firebaseio.com",
+  storageBucket: "",
+};
+var yourAppInstance = firebase.initializeApp(config);
 
-    this.onData(ref.child('users/kulakowka'), (data) => (this.user = data))
-    this.onLiveData(ref.child('users'), (data) => (this.users = data))
-  },
+var firebaseDBDataRef = yourAppInstance.database().ref('<your base path>');
 
-  view (ctrl) {
-    return (
-      {ctrl.user && ctrl.user.username}
+// Sample mithril app usage
 
-      <ul>
-        {ctrl.users && ctrl.users.map(user => {
-          <li>{user.username}</li>
-        })}
-      </ul>
-    )
-  }
-}
+var SampleMithrilApp = {};
 
-export default Example
+SampleMithrilApp.controller = function(args) {
+  var scope = mixinFirebase(this);
+  
+  scope.onlivedata(args.firebase, function(data) {    
+    scope.customers = data;
+  });
+};
+
+SampleMithrilApp.view = function(ctrl) {
+
+  return m('ul', ctrl.customers.map(function(customer) {
+    return m('li', {
+      key: customer._id
+    }, customer.name);
+  }));
+};
+
+m.module(document.body, {
+	controller: function() {
+		/* Needed to pass arguments to the controller*/
+		return new SampleMithrilApp.controller({firebase: firebaseDBDataRef});
+	},
+	view: SampleMithrilApp.view
+});
+
 ```
